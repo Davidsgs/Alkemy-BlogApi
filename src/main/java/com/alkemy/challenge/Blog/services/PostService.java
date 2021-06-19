@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class PostService {
@@ -49,6 +50,8 @@ public class PostService {
         var post = modelMapper.map(postDTO,Post.class);
         var user = userService.findByEmail(myUserDetails.getUsername());
         post.setUserId(user.getId());
+        post.setCreationDate(new Date(System.currentTimeMillis()));
+        postRepository.save(post);
         return modelMapper.map(post,PostOutputDTO.class);
     }
 

@@ -24,8 +24,6 @@ public class Post {
 
     public String category;
 
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
     public Date creationDate;
 
     public Long userId;

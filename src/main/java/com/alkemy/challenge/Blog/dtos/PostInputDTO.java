@@ -11,5 +11,4 @@ public class PostInputDTO {
     private String content;
     private String image;
     public String category;
-    public Date creationDate;
 }
