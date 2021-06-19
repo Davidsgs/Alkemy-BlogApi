@@ -1,8 +1,6 @@
 package com.alkemy.challenge.Blog.models;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import java.util.Date;
 

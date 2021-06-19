@@ -1,16 +1,12 @@
 package com.alkemy.challenge.Blog.services;
-
 import com.alkemy.challenge.Blog.dtos.PostInputDTO;
 import com.alkemy.challenge.Blog.dtos.PostOutputDTO;
 import com.alkemy.challenge.Blog.models.MyUserDetails;
 import com.alkemy.challenge.Blog.models.Post;
-import com.alkemy.challenge.Blog.models.User;
 import com.alkemy.challenge.Blog.repository.PostRepository;
-import com.alkemy.challenge.Blog.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,9 +29,7 @@ public class PostService {
     }
 
     public PostOutputDTO getDTOById(Long id) throws IllegalArgumentException{
-        return modelMapper.map(
-                postRepository.findById(id).orElseThrow(() -> new IllegalStateException("Doesn't exist a post with id: " + id))
-                ,PostOutputDTO.class);
+        return modelMapper.map(getById(id),PostOutputDTO.class);
     }
 
     //getAll
