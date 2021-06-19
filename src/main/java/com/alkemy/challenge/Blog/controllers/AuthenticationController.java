@@ -25,7 +25,7 @@ public class AuthenticationController {
     private JwtUtil jwtUtil;
 
     @RequestMapping(path = "/sign_up", method = RequestMethod.POST)
-    ResponseEntity<?> register(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    ResponseEntity<?> register(@RequestBody AuthenticationRequest authenticationRequest) {
         return ResponseEntity.ok(myUserDetailsService.registerUser(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
     }
 
