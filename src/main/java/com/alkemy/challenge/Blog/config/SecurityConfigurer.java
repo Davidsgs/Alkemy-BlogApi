@@ -1,5 +1,4 @@
 package com.alkemy.challenge.Blog.config;
-
 import com.alkemy.challenge.Blog.services.MyUserDetailsService;
 import com.alkemy.challenge.Blog.util.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;

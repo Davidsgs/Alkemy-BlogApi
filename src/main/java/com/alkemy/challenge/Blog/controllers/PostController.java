@@ -22,7 +22,7 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<PostOutputDTO>> getPosts(@RequestParam(required = false) String title,
-                                                             @RequestParam(required = false) String category) {
+                                                        @RequestParam(required = false) String category) {
         var responseEntity = new ResponseEntity<List<PostOutputDTO>>(HttpStatus.BAD_REQUEST);
         if (title != null && category != null) {
             responseEntity = new ResponseEntity<>(postService.filterByTitleAndCategory(title, category), HttpStatus.OK);
@@ -37,39 +37,39 @@ public class PostController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<PostOutputDTO> getPostById(@PathVariable Long id){
-        var responseEntity = new ResponseEntity<PostOutputDTO>(HttpStatus.BAD_REQUEST);
-        try{
-            responseEntity = new ResponseEntity<>(postService.getDTOById(id),HttpStatus.OK);
-        }catch (Exception e){
-            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity getPostById(@PathVariable Long id) {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(postService.getDTOById(id));
+        } catch (Exception e) {
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
         }
         return responseEntity;
     }
 
     @PostMapping
-    public ResponseEntity<PostOutputDTO> createPost(@RequestBody PostInputDTO post, @AuthenticationPrincipal MyUserDetails user){
-        return new ResponseEntity<>(postService.createPost(post,user),HttpStatus.OK);
+    public ResponseEntity createPost(@RequestBody PostInputDTO post, @AuthenticationPrincipal MyUserDetails user) {
+        return new ResponseEntity(postService.createPost(post, user), HttpStatus.OK);
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<PostOutputDTO> updatePost(@PathVariable Long id, @RequestBody PostInputDTO post){
-        var responseEntity = new ResponseEntity<PostOutputDTO>(HttpStatus.BAD_REQUEST);
-        try{
-            responseEntity = new ResponseEntity<>(postService.updatePost(id,post),HttpStatus.OK);
+    public ResponseEntity updatePost(@PathVariable Long id, @RequestBody PostInputDTO post) {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(postService.updatePost(id, post));
         } catch (Exception e) {
-            responseEntity = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
         }
         return responseEntity;
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Boolean> deletePost(@PathVariable Long id){
-        var responseEntity = new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
-        try{
-            responseEntity = new ResponseEntity<>(postService.deletePost(id),HttpStatus.OK);
-        }catch (Exception e){
-            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity deletePost(@PathVariable Long id) {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(postService.deletePost(id));
+        } catch (Exception e) {
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
         }
         return responseEntity;
     }
