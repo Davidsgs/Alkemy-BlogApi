@@ -51,26 +51,13 @@ class BlogApplicationTests {
 	public void testExpectedExceptionTryingCreateAnRegisteredUser(){
 		//Creamos un user que ya esta registrado.
 		User user = new User();
-		user.setEmail("testJUNIT@email.com");
-		user.setPassword("genericPasswordHere");
+		user.setEmail("testUser@email.com");
+		user.setPassword("1234567");
 		//Nos aseguramos que nos de un error de IllegalStateException.
 		assertThrows(IllegalStateException.class,
 				() -> {
 			myUserDetailsService.registerUser(user.getEmail(),user.getPassword());
 		});
-	}
-
-	@Test //Test donde deberíamos recibir un error al intentar acceder a un usuario ya registrado
-	public void testExpectedIllegalStateExceptionTryingCreateAnRegisteredUser(){
-		//Creamos un user que ya esta registrado.
-		User user = new User();
-		user.setEmail("testJUNIT@email.com");
-		user.setPassword("genericPasswordHere");
-		//Nos aseguramos que nos de un error de IllegalStateException.
-		assertThrows(IllegalStateException.class,
-				() -> {
-					myUserDetailsService.registerUser(user.getEmail(),user.getPassword());
-				});
 	}
 
 	@Test //Test donde deberíamos recibir un error al intentar crear un usuario con un correo mal escrito

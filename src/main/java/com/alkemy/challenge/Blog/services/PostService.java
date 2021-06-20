@@ -60,7 +60,8 @@ public class PostService {
         if(postDTO.getTitle() != null) {postToUpdate.setTitle(postDTO.getTitle());}
         if(postDTO.getCategory() != null) {postToUpdate.setCategory(postDTO.getCategory());}
         if(postDTO.getContent() != null) {postToUpdate.setContent(postDTO.getContent());}
-        if(!ImageChecker.isValidExtension(postDTO.getImage())) {postToUpdate.setImage(postDTO.getImage());}
+
+        if(ImageChecker.isValidExtension(postDTO.getImage())) {postToUpdate.setImage(postDTO.getImage());}
         return modelMapper.map(postToUpdate,PostOutputDTO.class);
 
     }
@@ -102,7 +103,4 @@ public class PostService {
         }
         return postOutputList;
     }
-
-
-
 }
