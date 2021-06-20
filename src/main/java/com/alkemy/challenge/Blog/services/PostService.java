@@ -4,6 +4,7 @@ import com.alkemy.challenge.Blog.dtos.PostOutputDTO;
 import com.alkemy.challenge.Blog.models.MyUserDetails;
 import com.alkemy.challenge.Blog.models.Post;
 import com.alkemy.challenge.Blog.repository.PostRepository;
+import com.alkemy.challenge.Blog.util.ImageChecker;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class PostService {
     //createPost
 
     public PostOutputDTO createPost(PostInputDTO postDTO, MyUserDetails myUserDetails){
+        if(!ImageChecker.isValidExtension(postDTO.getImage())){
+            throw new IllegalStateException("The image isn't compatible, try to put a *.jpe/jpeg/png/");
+        }
         var post = modelMapper.map(postDTO,Post.class);
         var user = userService.findByEmail(myUserDetails.getUsername());
         post.setUserId(user.getId());
@@ -56,7 +60,7 @@ public class PostService {
         if(postDTO.getTitle() != null) {postToUpdate.setTitle(postDTO.getTitle());}
         if(postDTO.getCategory() != null) {postToUpdate.setCategory(postDTO.getCategory());}
         if(postDTO.getContent() != null) {postToUpdate.setContent(postDTO.getContent());}
-        if(postDTO.getImage() != null) {postToUpdate.setImage(postDTO.getImage());}
+        if(!ImageChecker.isValidExtension(postDTO.getImage())) {postToUpdate.setImage(postDTO.getImage());}
         return modelMapper.map(postToUpdate,PostOutputDTO.class);
 
     }

@@ -1,5 +1,4 @@
 package com.alkemy.challenge.Blog.controllers;
-
 import com.alkemy.challenge.Blog.dtos.PostInputDTO;
 import com.alkemy.challenge.Blog.dtos.PostOutputDTO;
 import com.alkemy.challenge.Blog.models.MyUserDetails;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -42,14 +40,20 @@ public class PostController {
         try {
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(postService.getDTOById(id));
         } catch (Exception e) {
-            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
         return responseEntity;
     }
 
     @PostMapping
     public ResponseEntity createPost(@RequestBody PostInputDTO post, @AuthenticationPrincipal MyUserDetails user) {
-        return new ResponseEntity(postService.createPost(post, user), HttpStatus.OK);
+        ResponseEntity responseEntity;
+        try{
+            responseEntity = ResponseEntity.ok(postService.createPost(post, user));
+        } catch (Exception e){
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return responseEntity;
     }
 
     @PatchMapping(path = "/{id}")
@@ -58,7 +62,7 @@ public class PostController {
         try {
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(postService.updatePost(id, post));
         } catch (Exception e) {
-            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
         return responseEntity;
     }
@@ -69,7 +73,7 @@ public class PostController {
         try {
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(postService.deletePost(id));
         } catch (Exception e) {
-            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
         return responseEntity;
     }

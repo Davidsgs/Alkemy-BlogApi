@@ -4,6 +4,7 @@ import com.alkemy.challenge.Blog.util.AuthenticationRequest;
 import com.alkemy.challenge.Blog.util.AuthenticationResponse;
 import com.alkemy.challenge.Blog.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,7 +27,13 @@ public class AuthenticationController {
 
     @RequestMapping(path = "/sign_up", method = RequestMethod.POST)
     ResponseEntity<?> register(@RequestBody AuthenticationRequest authenticationRequest) {
-        return ResponseEntity.ok(myUserDetailsService.registerUser(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+        ResponseEntity response;
+        try{
+            response = ResponseEntity.ok(myUserDetailsService.registerUser(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+        }catch (Exception e){
+            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return response;
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
