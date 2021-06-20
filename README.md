@@ -8,7 +8,7 @@ Correo: davidsamuelgarciasanchez@gmail.com<br />
 
 ## 📖 Documentación: 📚
 Los endpoints fueron [documentados](src/main/resources/documentation/blogAPIEndPoints.postman_collection.json) utilizando [Postman](https://www.postman.com).
-Tambien estan los requisitos a cumplir [aquí](srt/main/resources/documentation/challenge.pdf).
+Tambien estan los requisitos a cumplir [aquí](src/main/resources/documentation/challenge.pdf).
 
 
 <br />
