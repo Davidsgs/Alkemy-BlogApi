@@ -7,7 +7,9 @@ Correo: davidsamuelgarciasanchez@gmail.com<br />
 [Discord](https://discord.com): David G.#8316
 
 ## 📖 Documentación: 📚
-Proximamente.
+Los endpoints fueron [documentados](src/main/resources/documentation/blogAPIEndPoints.postman_collection.json) utilizando [Postman](https://www.postman.com).
+Tambien estan los requisitos a cumplir [aquí](src/main/resources/documentation/challenge.pdf).
+
 
 <br />
 <br />
@@ -17,7 +19,9 @@ ApiRest created to resolve the Alkemy's Warm Up Challenge, where the structure o
 will be authenticated by SpringSecurity and JWT (JSON Web Token), the different Posts that can be made being registered within the API are also modeled. 
 
 ## 📖 Documentation: 📚
-Coming Soon.
+The API Endpoints has been [documented](src/main/resources/documentation/blogAPIEndPoints.postman_collection.json) using [Postman](https://www.postman.com).
+The scheduled tasks are [here](src/main/resources/documentation/challenge.pdf).
+
 ## 💬 Author: @Davidsgs (David García) 💬
 Email: davidsamuelgarciasanchez@gmail.com<br />
 [Discord](https://discord.com): David G.#8316
